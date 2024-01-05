@@ -1147,6 +1147,7 @@ function parse_juxtapose(ps::ParseState)
             # x.3       ==>  x
             # f(2)2     ==>  (call f 2)
             # x' y      ==>  (call-post x ')
+            # x²        ==>  (call-post x ²)
             # x 'y      ==>  x
             # x@y       ==>  x
             break

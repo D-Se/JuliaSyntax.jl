@@ -1299,6 +1299,8 @@ function lex_identifier(l::Lexer, c)
             @inbounds if (pc_byte == UInt8('!') && ppc == '=') || !ascii_is_identifier_char[pc_byte+1]
                 break
             end
+        elseif pc in ('⁰','¹','²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹')
+            break
         elseif Unicode.isgraphemebreak!(graphemestate, c, pc)
             if (pc == '!' && ppc == '=') || !is_identifier_char(pc)
                 break
