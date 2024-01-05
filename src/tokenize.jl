@@ -1315,7 +1315,30 @@ function lex_identifier(l::Lexer, c)
         n += 1
     end
 
-    if n > MAX_KW_LENGTH
+    if n == 1 && c in ('⁰','¹','²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹')
+        if c == '⁰'
+            emit(l, K"⁰")    
+        elseif c == "¹"
+            emit(l, K"¹")
+        elseif c == '²'
+            emit(l, K"²")
+        elseif c == '³'
+            emit(l, K"³")
+        elseif c == '⁴'
+            emit(l, K"⁴")
+        elseif c == '⁵'
+            emit(l, K"⁵")
+        elseif c == '⁶'
+            emit(l, K"⁶")
+        elseif c == '⁷'
+            emit(l, K"⁷")
+        elseif c == '⁸'
+            emit(l, K"⁸")
+        elseif c == '⁹'
+            emit(l, K"⁹")
+        end
+    elseif n > MAX_KW_LENGTH
+    #if n > MAX_KW_LENGTH
         emit(l, K"Identifier")
     else
         emit(l, get(kw_hash, h, K"Identifier"))

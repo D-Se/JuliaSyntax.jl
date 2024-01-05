@@ -1667,9 +1667,10 @@ function parse_call_chain(ps::ParseState, mark, is_macrocall=false)
                 maybe_strmac_1 = true
                 emit(ps, mark, K".")
             end
-        elseif k == K"'" && !preceding_whitespace(t)
+        elseif k in KSet"' ⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹" && !preceding_whitespace(t)
             # f'  ==> (call-post f ')
             # f'ᵀ ==> (call-post f 'ᵀ)
+            # x²  ==> (call-post x ²)
             bump(ps)
             emit(ps, mark, K"call", POSTFIX_OP_FLAG)
         elseif k == K"{"
